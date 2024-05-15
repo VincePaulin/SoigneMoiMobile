@@ -8,7 +8,7 @@ import 'package:soigne_moi_mobile/screens/login/login.dart';
 import 'package:soigne_moi_mobile/utils/screen_size.dart';
 
 abstract class AppRoutes {
-  static FutureOr<String?> loggedInRedirect(
+  static FutureOr<String?> wrapper(
     BuildContext context,
     GoRouterState state,
   ) async {
@@ -17,22 +17,10 @@ abstract class AppRoutes {
     final token = await secureStorage.read(key: 'access_token');
 
     if (token != null) {
-      return null; // Renvoie null si l'utilisateur est connecté mais aucune redirection n'est nécessaire
+      return '/home'; // Returns home if the user is logged in but no redirection is required
     } else {
-      return '/login'; // Redirige vers la page de connexion si l'utilisateur n'est pas connecté
+      return '/login'; //  Redirects to login page if user is not logged in
     }
-  }
-
-  static FutureOr<String?> loggedOutRedirect(
-    BuildContext context,
-    GoRouterState state,
-  ) async {
-    // Check connection
-    FlutterSecureStorage secureStorage = const FlutterSecureStorage();
-    final token = await secureStorage.read(key: 'access_token');
-    if (token == null) return '/login';
-
-    return null;
   }
 
   AppRoutes();
@@ -40,7 +28,7 @@ abstract class AppRoutes {
   static final List<RouteBase> routes = [
     GoRoute(
       path: '/',
-      redirect: loggedInRedirect,
+      redirect: wrapper,
     ),
     GoRoute(
         path: '/login',
@@ -49,7 +37,7 @@ abstract class AppRoutes {
               state,
               const Login(),
             ),
-        redirect: loggedInRedirect),
+        redirect: wrapper),
     GoRoute(
         path: '/home',
         pageBuilder: (context, state) => defaultPageBuilder(
@@ -57,7 +45,7 @@ abstract class AppRoutes {
               state,
               const HomePage(),
             ),
-        redirect: loggedOutRedirect),
+        redirect: wrapper),
   ];
 
   static Page defaultPageBuilder(
