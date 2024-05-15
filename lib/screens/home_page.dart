@@ -29,32 +29,35 @@ class HomePage extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: Center(
-                    child: Column(
-                      children: [
-                        Text(
-                          "Aujourd'hui",
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                        Text(
-                          formattedDate,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
                 Expanded(
+                    flex: 1,
+                    child: Container(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: Center(
+                        child: Column(
+                          children: [
+                            Text(
+                              "Aujourd'hui",
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Text(
+                              formattedDate,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )),
+                Expanded(
+                  flex: 5,
                   child: ListView.builder(
                     itemCount: 10,
                     itemBuilder: (context, index) {
