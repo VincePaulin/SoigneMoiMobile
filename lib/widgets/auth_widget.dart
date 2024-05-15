@@ -9,19 +9,19 @@ Widget buildLoginEmailTextField(LoginController controller) {
     controller: controller.emailController,
     textInputAction: TextInputAction.next,
     keyboardType: TextInputType.emailAddress,
-    style: const TextStyle(color: Colors.white),
+    style: const TextStyle(color: Colors.grey),
     decoration: InputDecoration(
       prefixIcon: const Icon(
         Icons.email_outlined,
       ),
-      prefixIconColor: Colors.white,
+      prefixIconColor: Colors.grey,
       errorText: controller.emailError,
       errorMaxLines: 3,
       errorStyle: const TextStyle(color: Colors.red),
       hintText: 'Email',
-      hintStyle: const TextStyle(color: Colors.white),
+      hintStyle: const TextStyle(color: Colors.grey),
       enabledBorder: const UnderlineInputBorder(
-        borderSide: BorderSide(color: Colors.white),
+        borderSide: BorderSide(color: Colors.grey),
       ),
     ),
   );
@@ -36,16 +36,16 @@ Widget buildLoginPasswordTextField(LoginController controller) {
     textInputAction: TextInputAction.go,
     obscureText: !controller.showPassword,
     onSubmitted: (_) => controller.login(),
-    style: const TextStyle(color: Colors.white),
+    style: const TextStyle(color: Colors.grey),
     decoration: InputDecoration(
       prefixIcon: const Icon(
         Icons.lock_outlined,
       ),
-      prefixIconColor: Colors.white,
+      prefixIconColor: Colors.grey,
       errorText: controller.passwordError,
       errorMaxLines: 3,
       errorStyle: const TextStyle(color: Colors.red),
-      suffixIconColor: Colors.white,
+      suffixIconColor: Colors.grey,
       suffixIcon: IconButton(
         onPressed: controller.toggleShowPassword,
         icon: Icon(
@@ -55,10 +55,31 @@ Widget buildLoginPasswordTextField(LoginController controller) {
         ),
       ),
       enabledBorder: const UnderlineInputBorder(
-        borderSide: BorderSide(color: Colors.white),
+        borderSide: BorderSide(color: Colors.grey),
       ),
       hintText: 'Mot de passe',
-      hintStyle: const TextStyle(color: Colors.white),
+      hintStyle: const TextStyle(color: Colors.grey),
+    ),
+  );
+}
+
+Widget buildLoginButton(LoginController controller) {
+  return Center(
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: ElevatedButton(
+        onPressed: controller.loading ? null : controller.login,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.green,
+          padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 54.0),
+        ),
+        child: controller.loading
+            ? const LinearProgressIndicator()
+            : Text(
+                "Connexion",
+                style: const TextStyle(color: Colors.white),
+              ),
+      ),
     ),
   );
 }
