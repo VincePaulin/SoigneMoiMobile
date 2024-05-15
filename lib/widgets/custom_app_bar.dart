@@ -1,6 +1,8 @@
 // widgets/custom_app_bar.dart
 import 'package:flutter/material.dart';
 
+import 'custom_avatar.dart';
+
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({Key? key});
 
@@ -10,6 +12,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       forceMaterialTransparency: true,
       title: Row(
         children: [
+          CustomAvatar(
+            sex: 'homme',
+          ),
+          const SizedBox(
+            width: 2.0,
+          ),
           Text(
             'Dr. Prenom Nom',
             style: TextStyle(
