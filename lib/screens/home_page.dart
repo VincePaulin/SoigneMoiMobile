@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:soigne_moi_mobile/widgets/custom_app_bar.dart'; // Importez la bibliothèque intl
+import 'package:soigne_moi_mobile/widgets/custom_app_bar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
