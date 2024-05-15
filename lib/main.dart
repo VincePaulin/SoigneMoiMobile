@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:soigne_moi_mobile/utils/app_colors.dart';
 
 import 'config/routes.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       title: 'Soigne Moi',
       routerConfig: router,
       theme: ThemeData(
-        //colorScheme: ColorScheme.fromSeed(seedColor: AppColors.accentColor),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.accentColor),
         useMaterial3: true,
       ),
     );
