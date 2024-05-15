@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
                             Text(
                               formattedDate,
                               style: const TextStyle(
-                                fontSize: 18,
+                                fontSize: 28,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
                               ),
