@@ -45,22 +45,9 @@ class LoginView extends StatelessWidget {
                     const SizedBox(height: 10),
                     // Password TextField
                     buildLoginPasswordTextField(controller),
-                    const SizedBox(height: 10),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    GestureDetector(
-                      onTap: () {},
-                      child: Text(
-                        'Mot de passe oublié ?',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 30),
                 // Login Button
                 buildLoginButton(controller),
               ],
