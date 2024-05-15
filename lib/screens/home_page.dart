@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // Importez la bibliothèque intl
+import 'package:intl/intl.dart';
+import 'package:soigne_moi_mobile/widgets/custom_app_bar.dart'; // Importez la bibliothèque intl
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -11,15 +12,7 @@ class HomePage extends StatelessWidget {
 
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Row(
-            children: const [
-              Text('Nom du docteur'),
-              Spacer(),
-              //Icon(Icons.logo),
-            ],
-          ),
-        ),
+        appBar: CustomAppBar(),
         body: Stack(
           children: [
             Positioned.fill(
