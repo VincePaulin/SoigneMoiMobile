@@ -16,6 +16,7 @@ class HomeController extends State<Home> {
   Doctor? doctor;
   List<Appointment> appointments = [];
   bool loading = true;
+  Appointment? appointmentSelected;
 
   @override
   void initState() {
@@ -35,6 +36,34 @@ class HomeController extends State<Home> {
       setState(() {
         doctor = Doctor.fromJson(doctorJson);
         appointments = appointmentsData;
+        loading = false;
+      });
+    } catch (e) {
+      if (kDebugMode) {
+        print('Failed to fetch doctor agenda: $e');
+      }
+    }
+  }
+
+  Future<void> selectAppointment(Appointment appointment) async {
+    try {
+      setState(() {
+        loading = true;
+        appointmentSelected = appointment;
+        loading = false;
+      });
+    } catch (e) {
+      if (kDebugMode) {
+        print('Failed to fetch doctor agenda: $e');
+      }
+    }
+  }
+
+  Future<void> clearSelectAppointment() async {
+    try {
+      setState(() {
+        loading = true;
+        appointmentSelected = null;
         loading = false;
       });
     } catch (e) {

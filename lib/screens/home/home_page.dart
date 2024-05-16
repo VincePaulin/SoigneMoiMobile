@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:soigne_moi_mobile/screens/home/home.dart';
+import 'package:soigne_moi_mobile/screens/appointment/appoitment_page.dart';
+import 'package:soigne_moi_mobile/screens/today_list_page.dart';
 import 'package:soigne_moi_mobile/utils/app_colors.dart';
 import 'package:soigne_moi_mobile/widgets/custom_app_bar.dart';
 import 'package:soigne_moi_mobile/widgets/custom_navigation_bar.dart';
-import 'package:soigne_moi_mobile/widgets/today_list_tile.dart';
+
+import 'home.dart';
 
 class HomePage extends StatelessWidget {
   final HomeController controller;
@@ -12,10 +13,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Format de la date
-    String formattedDate = DateFormat('dd/MM/yyyy').format(DateTime.now());
-
-    //print(controller.agenda?.appointments.length);
+    final bool itemSelected = controller.appointmentSelected != null;
     return MaterialApp(
       home: Scaffold(
         appBar: CustomAppBar(
@@ -34,50 +32,34 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                    flex: 1,
-                    child: Container(
-                      padding: const EdgeInsets.only(top: 16),
-                      child: Center(
-                        child: Column(
-                          children: [
-                            Text(
-                              "Aujourd'hui",
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Text(
-                              formattedDate,
-                              style: const TextStyle(
-                                fontSize: 28,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    )),
-                Expanded(
-                  flex: 5,
-                  child: ListView.builder(
-                    itemCount: controller.appointments.length,
-                    itemBuilder: (context, index) {
-                      final appointment = controller.appointments[index];
-
-                      return TodayListTile(
-                        appointment: appointment,
-                      );
-                    },
+            if (itemSelected)
+              Positioned(
+                top: 10,
+                right: 20,
+                child: GestureDetector(
+                  onTap: () => controller.clearSelectAppointment(),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.grey[200],
+                      border: Border.all(color: Colors.black, width: 1),
+                    ),
+                    padding: const EdgeInsets.all(8),
+                    child: const Icon(
+                      Icons.close,
+                      color: Colors.red,
+                      size: 24,
+                    ),
                   ),
                 ),
-              ],
+              ),
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 500),
+              child: !itemSelected
+                  ? TodayAppointmentPage(
+                      controller: controller,
+                    )
+                  : _buildAppointmentPageRoute(context, controller),
             ),
           ],
         ),
@@ -91,5 +73,10 @@ class HomePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _buildAppointmentPageRoute(
+      BuildContext context, HomeController controller) {
+    return AppointmentPage(controller: controller);
   }
 }
