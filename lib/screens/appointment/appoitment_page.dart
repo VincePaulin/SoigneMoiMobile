@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:soigne_moi_mobile/screens/home/home.dart';
 
 class AppointmentPage extends StatelessWidget {
@@ -7,6 +8,10 @@ class AppointmentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final startDate = controller.appointmentSelected?.startDate;
+    final endDate = controller.appointmentSelected?.endDate;
+    final String formattedStartDate = DateFormat('dd/MM').format(startDate!);
+    final String formattedSEndDate = DateFormat('dd/MM').format(endDate!);
     final appointment = controller.appointmentSelected;
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -33,6 +38,10 @@ class AppointmentPage extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 20),
+          Text(
+            "Séjour du $formattedStartDate au $formattedSEndDate",
+            style: const TextStyle(color: Colors.grey),
+          ),
 
           // Card
           Row(
@@ -97,8 +106,7 @@ class AppointmentPage extends StatelessWidget {
                             end: Alignment.bottomCenter,
                             colors: [Colors.lightBlue, Colors.lightBlue[800]!],
                           ),
-                          shape: BoxShape
-                              .circle, // Forme du Container enfant (circulaire)
+                          shape: BoxShape.circle,
                         ),
                         child: const Icon(
                           Icons.medical_services,
