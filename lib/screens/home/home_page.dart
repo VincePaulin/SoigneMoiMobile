@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:soigne_moi_mobile/screens/home/home.dart';
 import 'package:soigne_moi_mobile/widgets/custom_app_bar.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  final HomeController controller;
+  const HomePage({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
     // Format de la date
     String formattedDate = DateFormat('dd/MM/yyyy').format(DateTime.now());
 
+    //print(controller.agenda?.appointments.length);
     return MaterialApp(
       home: Scaffold(
         appBar: CustomAppBar(),
@@ -59,15 +62,17 @@ class HomePage extends StatelessWidget {
                 Expanded(
                   flex: 5,
                   child: ListView.builder(
-                    itemCount: 10,
+                    itemCount: controller.appointments.length,
                     itemBuilder: (context, index) {
+                      final appointment = controller.appointments[index];
+
                       return Card(
                         elevation: 4, // Raising for shadow effect
                         margin: const EdgeInsets.symmetric(
                             vertical: 8, horizontal: 16),
                         child: ListTile(
-                          title: Text('Titre de la tuile $index'),
-                          subtitle: Text('Sous-titre de la tuile $index'),
+                          title: Text(appointment.patientId),
+                          subtitle: Text(appointment.motif),
                           leading: const Icon(Icons.circle),
                           trailing: const Icon(Icons.arrow_forward_ios),
                           onTap: () {
