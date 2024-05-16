@@ -29,7 +29,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Colors.grey[400]!, Colors.white],
+            colors: [Colors.white, Colors.grey[400]!],
           ),
           boxShadow: [
             BoxShadow(
