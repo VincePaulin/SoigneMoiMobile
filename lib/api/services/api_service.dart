@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:soigne_moi_mobile/api/services/endpoints.dart';
 import 'package:soigne_moi_mobile/model/review.dart';
-import 'package:soigne_moi_mobile/screens/review/review.dart';
 
 class Api {
   final storage = FlutterSecureStorage();
