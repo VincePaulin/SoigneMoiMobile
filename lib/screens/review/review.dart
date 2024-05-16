@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:soigne_moi_mobile/api/services/api_service.dart';
 import 'package:soigne_moi_mobile/model/agenda.dart';
-import 'package:soigne_moi_mobile/model/doctor.dart';
 import 'package:soigne_moi_mobile/model/review.dart';
 import 'package:soigne_moi_mobile/screens/review/review_view.dart';
 

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:soigne_moi_mobile/screens/review/review.dart';
 import 'package:soigne_moi_mobile/utils/app_colors.dart';
+import 'package:soigne_moi_mobile/widgets/description_text_field.dart';
+import 'package:soigne_moi_mobile/widgets/libelle_text_field.dart';
 
 class LeaveMedicalReviewPage extends StatelessWidget {
   final ReviewController controller;
@@ -8,6 +11,7 @@ class LeaveMedicalReviewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String formattedDate = DateFormat('dd/MM/yyyy').format(DateTime.now());
     return Scaffold(
       appBar: AppBar(
         title: Text('Laisser un avis médical'),
@@ -26,59 +30,13 @@ class LeaveMedicalReviewPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                width: double.infinity,
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [Colors.grey[300]!, Colors.white],
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: TextFormField(
-                      controller: controller.libelleController,
-                      cursorColor: AppColors.accentColor,
-                      decoration: const InputDecoration(
-                        labelText: 'Titre de l\'avis',
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              Text("Avis du $formattedDate."),
+              LibelleTextField(controller: controller),
               const SizedBox(height: 16.0),
               Expanded(
                 flex: 5,
-                child: SizedBox(
-                  width: double.infinity,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [Colors.grey[300]!, Colors.white],
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: TextFormField(
-                        controller: controller.descriptionController,
-                        maxLines: 5,
-                        cursorColor: AppColors.accentColor,
-                        decoration: const InputDecoration(
-                          labelText: 'Description',
-                          focusColor: AppColors.accentColor,
-                          prefixIconColor: AppColors.accentColor,
-                          border: InputBorder.none,
-                        ),
-                      ),
-                    ),
-                  ),
+                child: DescriptionTextField(
+                  controller: controller,
                 ),
               ),
               const SizedBox(height: 10.0),

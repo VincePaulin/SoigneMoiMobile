@@ -15,7 +15,6 @@ class TodayAppointmentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Format de la date
     String formattedDate = DateFormat('dd/MM/yyyy').format(DateTime.now());
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
