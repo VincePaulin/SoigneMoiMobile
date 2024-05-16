@@ -51,9 +51,9 @@ class TodayAppointmentPage extends StatelessWidget {
         Expanded(
           flex: 5,
           child: ListView.builder(
-            itemCount: controller.appointments.length,
+            itemCount: controller.todayAppointments.length,
             itemBuilder: (context, index) {
-              final appointment = controller.appointments[index];
+              final appointment = controller.todayAppointments[index];
 
               return TodayListTile(
                 appointment: appointment,
