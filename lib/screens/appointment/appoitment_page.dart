@@ -16,75 +16,170 @@ class AppointmentPage extends StatelessWidget {
           // Nom en gras
           Text(
             "${appointment?.patient.firstName.toUpperCase()} ${appointment?.patient.name}",
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 10),
 
           // Row with location icon and text
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Icon(Icons.location_on),
-              const SizedBox(width: 8),
+              const SizedBox(width: 4),
               Text(
                 appointment!.patient.address.toString(),
-                style: const TextStyle(color: Colors.black87),
+                style: const TextStyle(color: Colors.black87, fontSize: 18),
               ),
             ],
           ),
           const SizedBox(height: 20),
 
           // Card
-          Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            color: Colors.grey[300],
-            elevation: 4,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                appointment.motif,
-                style: const TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 20),
-
-          // Row with 3 clickable CircleAvatars with icons inside
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              GestureDetector(
-                onTap: () {
-                  // Action
-                },
-                child: const CircleAvatar(
-                  backgroundColor: Colors.blue,
-                  child: Icon(Icons.medical_services),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  // Action
-                },
-                child: const CircleAvatar(
-                  backgroundColor: Colors.green,
-                  child: Icon(Icons.message),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  // Action
-                },
-                child: const CircleAvatar(
-                  backgroundColor: Colors.orange,
-                  child: Icon(Icons.check),
+              Expanded(
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  color: Colors.grey[300],
+                  elevation: 4,
+                  child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            'moti du séjour:',
+                            style: TextStyle(
+                                fontSize: 16, color: Colors.grey[700]),
+                          ),
+                          Text(
+                            appointment.motif,
+                            style: const TextStyle(
+                              fontSize: 18,
+                            ),
+                          )
+                        ],
+                      )),
                 ),
               ),
             ],
+          ),
+          const Spacer(),
+          // Row with 3 clickable CircleAvatars with icons inside
+          Padding(
+            padding: const EdgeInsets.only(bottom: 30),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    // Action
+                  },
+                  child: Container(
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [Colors.grey[500]!, Colors.white],
+                      ),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [Colors.lightBlue, Colors.lightBlue[800]!],
+                          ),
+                          shape: BoxShape
+                              .circle, // Forme du Container enfant (circulaire)
+                        ),
+                        child: const Icon(
+                          Icons.medical_services,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    // Action
+                  },
+                  child: Container(
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [Colors.grey[500]!, Colors.white],
+                      ),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [Colors.lightBlue, Colors.lightBlue[800]!],
+                          ),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.message,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    // Action
+                  },
+                  child: Container(
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [Colors.grey[500]!, Colors.white],
+                      ),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [Colors.lightBlue, Colors.lightBlue[800]!],
+                          ),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.check,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
