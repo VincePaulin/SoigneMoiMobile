@@ -21,20 +21,43 @@ class HomePage extends StatelessWidget {
         ),
         body: Stack(
           children: [
+            // Container with pointed top corners (blue top)
             Positioned.fill(
               child: Container(
                 decoration: const BoxDecoration(
                   color: AppColors.primaryColor,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(120),
-                    topRight: Radius.circular(120),
+                    topLeft:
+                        Radius.circular(30),
+                    topRight:
+                        Radius.circular(30),
+                  ),
+                ),
+              ),
+            ),
+            // Conteneur avec un fond gris positionné légèrement plus bas
+            Positioned(
+              top: 30,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [Colors.grey[100]!, Colors.grey[400]!],
+                  ),
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(50),
+                    topRight: Radius.circular(50),
                   ),
                 ),
               ),
             ),
             if (itemSelected)
               Positioned(
-                top: 10,
+                top: 15,
                 right: 20,
                 child: GestureDetector(
                   onTap: () => controller.clearSelectAppointment(),
@@ -48,28 +71,38 @@ class HomePage extends StatelessWidget {
                     child: const Icon(
                       Icons.close,
                       color: Colors.red,
-                      size: 24,
+                      size: 15,
                     ),
                   ),
                 ),
               ),
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 500),
-              child: !itemSelected
-                  ? TodayAppointmentPage(
-                      controller: controller,
-                    )
-                  : _buildAppointmentPageRoute(context, controller),
+            Positioned(
+              top: 30,
+              left: 0,
+              right: 0,
+              bottom: 70,
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 500),
+                child: !itemSelected
+                    ? TodayAppointmentPage(
+                        controller: controller,
+                      )
+                    : _buildAppointmentPageRoute(context, controller),
+              ),
             ),
+            Positioned(
+                bottom: 0,
+                right: 0,
+                left: 0,
+                child: CustomBottomNavigationBar(
+                  onHomePressed: () {
+                    // Action when home button is pressed
+                  },
+                  onSettingsPressed: () {
+                    // Action when the settings button is pressed
+                  },
+                ))
           ],
-        ),
-        bottomNavigationBar: CustomBottomNavigationBar(
-          onHomePressed: () {
-            // Action when home button is pressed
-          },
-          onSettingsPressed: () {
-            // Action when the settings button is pressed
-          },
         ),
       ),
     );

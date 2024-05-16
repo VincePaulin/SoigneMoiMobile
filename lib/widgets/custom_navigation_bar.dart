@@ -19,8 +19,7 @@ class CustomBottomNavigationBar extends StatefulWidget {
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: AppColors.primaryColor,
+    return Padding(
       padding: const EdgeInsets.all(10),
       child: Container(
         height: 60,

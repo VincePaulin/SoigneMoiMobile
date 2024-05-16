@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:soigne_moi_mobile/utils/app_colors.dart';
 import 'package:soigne_moi_mobile/widgets/today_list_tile.dart';
 
 import 'home/home.dart';
@@ -31,7 +32,7 @@ class TodayAppointmentPage extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: AppColors.secondaryColor,
                     ),
                   ),
                   Text(
@@ -39,7 +40,7 @@ class TodayAppointmentPage extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: AppColors.primaryColor,
                     ),
                   ),
                 ],
