@@ -15,7 +15,9 @@ class HomePage extends StatelessWidget {
     //print(controller.agenda?.appointments.length);
     return MaterialApp(
       home: Scaffold(
-        appBar: CustomAppBar(),
+        appBar: CustomAppBar(
+          doctor: controller.doctor!,
+        ),
         body: Stack(
           children: [
             Positioned.fill(
@@ -71,7 +73,8 @@ class HomePage extends StatelessWidget {
                         margin: const EdgeInsets.symmetric(
                             vertical: 8, horizontal: 16),
                         child: ListTile(
-                          title: Text(appointment.patientId),
+                          title: Text(
+                              "${appointment.patient.firstName.toUpperCase()} ${appointment.patient.name}"),
                           subtitle: Text(appointment.motif),
                           leading: const Icon(Icons.circle),
                           trailing: const Icon(Icons.arrow_forward_ios),

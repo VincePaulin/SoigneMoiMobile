@@ -46,12 +46,14 @@ class HomeController extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    if (loading) {
+    if (loading != true) {
       return HomePage(
         controller: this,
       );
     } else {
-      return const CircularProgressIndicator();
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
     }
   }
 }
