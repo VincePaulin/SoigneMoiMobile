@@ -1,3 +1,5 @@
+import 'package:soigne_moi_mobile/model/user.dart';
+
 import 'doctor.dart';
 
 // Template for showing an appointment
@@ -5,7 +7,7 @@ class Appointment {
   final String? id;
   final DateTime startDate;
   final DateTime endDate;
-  final String patientId;
+  final User patient;
   final String doctorMatricule;
   final String stayId;
   final String motif;
@@ -14,7 +16,7 @@ class Appointment {
     this.id,
     required this.startDate,
     required this.endDate,
-    required this.patientId,
+    required this.patient,
     required this.doctorMatricule,
     required this.stayId,
     required this.motif,
@@ -25,22 +27,11 @@ class Appointment {
       id: json['id'].toString(),
       startDate: DateTime.parse(json['start_date']),
       endDate: DateTime.parse(json['end_date']),
-      patientId: json['patient_id'].toString(),
+      patient: User.fromJson(json['patient']),
       doctorMatricule: json['doctor_matricule'].toString(),
       stayId: json['stay_id'].toString(),
       motif: json['motif'] ?? "",
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'start_date': startDate.toIso8601String(),
-      'end_date': endDate.toIso8601String(),
-      'patient_id': patientId,
-      'doctor_matricule': doctorMatricule,
-      'stay_id': stayId,
-      'motif': motif,
-    };
   }
 }
 
