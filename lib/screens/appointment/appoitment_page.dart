@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:soigne_moi_mobile/screens/home/home.dart';
 import 'package:soigne_moi_mobile/utils/app_colors.dart';
+import 'package:soigne_moi_mobile/widgets/appointment_icon_button.dart';
 import 'package:soigne_moi_mobile/widgets/motif_card.dart';
 import 'package:soigne_moi_mobile/widgets/patient_info.dart';
 
@@ -27,110 +29,28 @@ class AppointmentPage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                GestureDetector(
+                // prescription button
+                AppointmentIconButton(
+                  icon: MdiIcons.pill,
                   onTap: () {
                     // Action
                   },
-                  child: Container(
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [Colors.grey[500]!, Colors.white],
-                      ),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Center(
-                      child: Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [Colors.lightBlue, Colors.lightBlue[800]!],
-                          ),
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(
-                          Icons.medical_services,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
                 ),
-                GestureDetector(
+
+                // button to leave a review
+                AppointmentIconButton(
+                  icon: MdiIcons.penPlus,
                   onTap: () {
                     // Action
                   },
-                  child: Container(
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [Colors.grey[500]!, Colors.white],
-                      ),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Center(
-                      child: Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [Colors.lightBlue, Colors.lightBlue[800]!],
-                          ),
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(
-                          Icons.message,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
                 ),
-                GestureDetector(
+
+                // button to view the customer review file
+                AppointmentIconButton(
+                  icon: MdiIcons.folderSearch,
                   onTap: () {
                     // Action
                   },
-                  child: Container(
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [Colors.grey[500]!, Colors.white],
-                      ),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Center(
-                      child: Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [Colors.lightBlue, Colors.lightBlue[800]!],
-                          ),
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(
-                          Icons.check,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
                 ),
               ],
             ),
