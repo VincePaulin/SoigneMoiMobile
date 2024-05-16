@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:soigne_moi_mobile/screens/home/home.dart';
 import 'package:soigne_moi_mobile/widgets/custom_app_bar.dart';
+import 'package:soigne_moi_mobile/widgets/today_list_tile.dart';
 
 class HomePage extends StatelessWidget {
   final HomeController controller;
@@ -68,20 +69,8 @@ class HomePage extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final appointment = controller.appointments[index];
 
-                      return Card(
-                        elevation: 4, // Raising for shadow effect
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 8, horizontal: 16),
-                        child: ListTile(
-                          title: Text(
-                              "${appointment.patient.firstName.toUpperCase()} ${appointment.patient.name}"),
-                          subtitle: Text(appointment.motif),
-                          leading: const Icon(Icons.circle),
-                          trailing: const Icon(Icons.arrow_forward_ios),
-                          onTap: () {
-                            // Action to be taken when the ListTile is clicked
-                          },
-                        ),
+                      return TodayListTile(
+                        appointment: appointment,
                       );
                     },
                   ),
