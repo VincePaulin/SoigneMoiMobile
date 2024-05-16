@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:soigne_moi_mobile/api/services/endpoints.dart';
+import 'package:soigne_moi_mobile/model/review.dart';
+import 'package:soigne_moi_mobile/screens/review/review.dart';
 
 class Api {
   final storage = FlutterSecureStorage();
@@ -36,6 +39,37 @@ class Api {
       final errorMessage =
           e.response?.data['error'] ?? e.response?.data['message'];
       throw errorMessage;
+    }
+  }
+
+  // Function to create a medical review
+  Future<void> createMedicalReview(ReviewModel review) async {
+    dio.options.baseUrl = Endpoints.baseUrl;
+
+    final Map<String, dynamic> reviewJson = review.toJson();
+
+    try {
+      final response = await dio.post(
+        '/doctor/create-review',
+        data: reviewJson,
+        options: await _generateOptions(),
+      );
+
+      // Check if the response status code is OK (201)
+      if (response.statusCode == 201) {
+        // Avis créé avec succès
+        if (kDebugMode) {
+          print('Avis médical créé avec succès');
+        }
+      } else {
+        // Error when creating medical advice
+        final messageError = response.data['message'];
+        throw messageError;
+      }
+    } on DioException catch (e) {
+      final messageError =
+          e.response?.data['message'] ?? "Une erreur s'est produit";
+      throw messageError;
     }
   }
 }
