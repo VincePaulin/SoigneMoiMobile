@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';
+import 'package:soigne_moi_mobile/model/doctor.dart';
 
 import 'custom_avatar.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final Doctor doctor;
   const CustomAppBar({
     super.key,
+    required this.doctor,
   });
 
   @override
@@ -34,14 +37,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               ];
             },
             icon: CustomAvatar(
-              sex: 'homme',
+              sex: doctor.sex,
+              avatarUrl: doctor.avatarURL,
             ),
           ),
           const SizedBox(
             width: 2.0,
           ),
           Text(
-            'Dr. Prenom Nom',
+            doctor.fullName,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
