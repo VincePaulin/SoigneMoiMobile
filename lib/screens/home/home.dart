@@ -6,6 +6,7 @@ import 'package:soigne_moi_mobile/model/agenda.dart';
 import 'package:soigne_moi_mobile/model/doctor.dart';
 import 'package:soigne_moi_mobile/model/review.dart';
 import 'package:soigne_moi_mobile/screens/home/home_page.dart';
+import 'package:soigne_moi_mobile/widgets/error_dialog.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -93,34 +94,38 @@ class HomeController extends State<Home> {
   }
 
   Future<void> submitMedicalReview() async {
-    String libelle = libelleController.text;
-    String description = descriptionController.text;
-    final patientId = appointmentSelected?.patient.id;
+   try{
+     String libelle = libelleController.text;
+     String description = descriptionController.text;
+     final patientId = appointmentSelected?.patient.id;
 
-    final review = ReviewModel(
-        title: libelle,
-        description: description,
-        patientId: patientId.toString());
+     final review = ReviewModel(
+         title: libelle,
+         description: description,
+         patientId: patientId.toString());
 
-    await Api().createMedicalReview(review);
+     await Api().createMedicalReview(review);
 
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Avis envoyé'),
-          content: Text('Votre avis médical a été envoyé avec succès.'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
+     showDialog(
+       context: context,
+       builder: (BuildContext context) {
+         return AlertDialog(
+           title: Text('Avis envoyé'),
+           content: Text('Votre avis médical a été envoyé avec succès.'),
+           actions: [
+             TextButton(
+               onPressed: () {
+                 Navigator.pop(context);
+               },
+               child: Text('OK'),
+             ),
+           ],
+         );
+       },
+     );
+   }catch (e){
+     showErrorDialog(e.toString(), context);
+   }
 
     libelleController.clear();
     descriptionController.clear();
