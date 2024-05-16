@@ -9,12 +9,32 @@ class IconAndDottedLines extends StatelessWidget {
       children: [
         // White circular icon
         Container(
-          decoration: const BoxDecoration(
+          width: 20,
+          height: 20,
+          decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.white,
+            border: Border.all(
+              color: Colors.grey,
+              width: 0.5,
+            ),
+            gradient: LinearGradient(
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
+              colors: [Colors.grey[400]!, Colors.white],
+            ),
           ),
-          child:
-              const Icon(Icons.circle, color: Colors.grey), // Placeholder icon
+          child: Container(
+            width: 10,
+            height: 10,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Colors.grey[400]!, Colors.white],
+              ),
+              shape: BoxShape.circle,
+            ),
+          ), // Placeholder icon
         ),
         // Vertical dotted lines
         Column(
@@ -24,7 +44,7 @@ class IconAndDottedLines extends StatelessWidget {
             (index) => Container(
               width: 1,
               height: 5,
-              color: Colors.white,
+              color: Colors.grey,
               margin: const EdgeInsets.symmetric(vertical: 3),
             ),
           ),

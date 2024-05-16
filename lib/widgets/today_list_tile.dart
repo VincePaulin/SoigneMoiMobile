@@ -34,16 +34,8 @@ class TodayListTile extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [Colors.grey[350]!, Colors.white],
+                  colors: [Colors.grey[400]!, Colors.white],
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.5),
-                    spreadRadius: 1,
-                    blurRadius: 3,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
               ),
               child: ListTile(
                 contentPadding:

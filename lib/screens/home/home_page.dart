@@ -27,15 +27,13 @@ class HomePage extends StatelessWidget {
                 decoration: const BoxDecoration(
                   color: AppColors.primaryColor,
                   borderRadius: BorderRadius.only(
-                    topLeft:
-                        Radius.circular(30),
-                    topRight:
-                        Radius.circular(30),
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
                   ),
                 ),
               ),
             ),
-            // Conteneur avec un fond gris positionné légèrement plus bas
+            // Container with grey background positioned slightly lower
             Positioned(
               top: 30,
               left: 0,
