@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:soigne_moi_mobile/screens/home/home.dart';
+import 'package:soigne_moi_mobile/utils/app_colors.dart';
 import 'package:soigne_moi_mobile/widgets/custom_app_bar.dart';
+import 'package:soigne_moi_mobile/widgets/custom_navigation_bar.dart';
 import 'package:soigne_moi_mobile/widgets/today_list_tile.dart';
 
 class HomePage extends StatelessWidget {
@@ -24,7 +26,7 @@ class HomePage extends StatelessWidget {
             Positioned.fill(
               child: Container(
                 decoration: const BoxDecoration(
-                  color: Colors.blue,
+                  color: AppColors.primaryColor,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(120),
                     topRight: Radius.circular(120),
@@ -78,6 +80,14 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ],
+        ),
+        bottomNavigationBar: CustomBottomNavigationBar(
+          onHomePressed: () {
+            // Action when home button is pressed
+          },
+          onSettingsPressed: () {
+            // Action when the settings button is pressed
+          },
         ),
       ),
     );
