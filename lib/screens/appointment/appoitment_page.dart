@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:soigne_moi_mobile/screens/home/home.dart';
+import 'package:soigne_moi_mobile/screens/review/review.dart';
+import 'package:soigne_moi_mobile/screens/review/review_view.dart';
 import 'package:soigne_moi_mobile/utils/app_colors.dart';
 import 'package:soigne_moi_mobile/widgets/appointment_icon_button.dart';
 import 'package:soigne_moi_mobile/widgets/motif_card.dart';
@@ -39,11 +41,17 @@ class AppointmentPage extends StatelessWidget {
 
                 // button to leave a review
                 AppointmentIconButton(
-                  icon: MdiIcons.penPlus,
-                  onTap: () {
-                    // Action
-                  },
-                ),
+                    icon: MdiIcons.penPlus,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Review(
+                                  matricule: controller.doctor!.matricule,
+                                  appointment: controller.appointmentSelected!,
+                                )),
+                      );
+                    }),
 
                 // button to view the customer review file
                 AppointmentIconButton(

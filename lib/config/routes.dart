@@ -1,11 +1,12 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:soigne_moi_mobile/screens/home/home.dart';
-import 'package:soigne_moi_mobile/screens/home/home_page.dart';
 import 'package:soigne_moi_mobile/screens/login/login.dart';
+import 'package:soigne_moi_mobile/screens/review/review_view.dart';
 import 'package:soigne_moi_mobile/utils/screen_size.dart';
 
 abstract class AppRoutes {
@@ -40,13 +41,14 @@ abstract class AppRoutes {
             ),
         redirect: wrapper),
     GoRoute(
-        path: '/home',
-        pageBuilder: (context, state) => defaultPageBuilder(
-              context,
-              state,
-              const Home(),
-            ),
-        redirect: wrapper),
+      path: '/home',
+      pageBuilder: (context, state) => defaultPageBuilder(
+        context,
+        state,
+        const Home(),
+      ),
+      redirect: wrapper,
+    ),
   ];
 
   static Page defaultPageBuilder(
