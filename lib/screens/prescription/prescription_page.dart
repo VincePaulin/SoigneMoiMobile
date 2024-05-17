@@ -34,7 +34,7 @@ class _PrescriptionPageState extends State<PrescriptionPage> {
             child: ElevatedButton(
               onPressed: widget.controller.prescribedDrugs.isEmpty
                   ? null
-                  : widget.controller.createPrescription,
+                  : widget.controller.showConfirmationDialog,
               style: ElevatedButton.styleFrom(
                   disabledForegroundColor: Colors.grey.withOpacity(0.38),
                   disabledBackgroundColor: Colors.grey

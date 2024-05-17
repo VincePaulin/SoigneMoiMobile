@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart'; // Importer intl pour formater les dates
 import 'package:soigne_moi_mobile/api/services/api_service.dart';
 import 'package:soigne_moi_mobile/model/agenda.dart';
 import 'package:soigne_moi_mobile/model/doctor.dart';
@@ -164,9 +165,7 @@ class HomeController extends State<Home> {
         throw Exception('Failed to load drugs');
       }
     } catch (e) {
-      if (kDebugMode) {
-        print('Error fetching drugs: $e');
-      }
+      print('Error fetching drugs: $e');
     }
   }
 
@@ -188,6 +187,89 @@ class HomeController extends State<Home> {
       print('Prescription créée avec ${prescribedDrugs.length} médicaments');
     }
     // Action to create
+  }
+
+  Future<void> showConfirmationDialog() async {
+    DateTime startDate = DateTime.now();
+    DateTime endDate = startDate
+        .add(Duration(days: 2)); // endDate default 2 days after startDate
+
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button to dismiss
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          // Using StatefulBuilder to manage date status
+          builder: (context, setState) {
+            return AlertDialog(
+              title: Text('Confirmer la prescription'),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    Text(
+                        'Sélectionnez les dates de début et de fin pour la prescription.'),
+                    SizedBox(height: 10),
+                    Text('Date de début:'),
+                    TextButton(
+                      onPressed: () async {
+                        DateTime? pickedDate = await showDatePicker(
+                          context: context,
+                          initialDate: startDate,
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(2101),
+                        );
+                        if (pickedDate != null) {
+                          setState(() {
+                            startDate = pickedDate;
+                            endDate = pickedDate.add(
+                                Duration(days: 2)); // Update endDate by default
+                          });
+                        }
+                      },
+                      child: Text(DateFormat('dd/MM/yyyy').format(startDate)),
+                    ),
+                    SizedBox(height: 10),
+                    Text('Date de fin:'),
+                    TextButton(
+                      onPressed: () async {
+                        DateTime? pickedDate = await showDatePicker(
+                          context: context,
+                          initialDate: endDate,
+                          firstDate:
+                              startDate, // endDate cannot be before startDate
+                          lastDate: DateTime(2101),
+                        );
+                        if (pickedDate != null) {
+                          setState(() {
+                            endDate = pickedDate;
+                          });
+                        }
+                      },
+                      child: Text(DateFormat('dd/MM/yyyy').format(endDate)),
+                    ),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: Text('Annuler'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                TextButton(
+                  child: Text('Confirmer'),
+                  onPressed: () {
+                    createPrescription();
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
   }
 
   @override
