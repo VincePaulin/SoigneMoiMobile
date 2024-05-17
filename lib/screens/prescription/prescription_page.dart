@@ -36,10 +36,10 @@ class _PrescriptionPageState extends State<PrescriptionPage> {
                   ? null
                   : widget.controller.createPrescription,
               style: ElevatedButton.styleFrom(
-                disabledForegroundColor: Colors.grey.withOpacity(0.38),
-                disabledBackgroundColor: Colors.grey
-                    .withOpacity(0.12), // color when button deactivated
-              ),
+                  disabledForegroundColor: Colors.grey.withOpacity(0.38),
+                  disabledBackgroundColor: Colors.grey
+                      .withOpacity(0.12), // color when button deactivated
+                  foregroundColor: Colors.green),
               child: Text('Valider'),
             ),
           ),
@@ -191,14 +191,45 @@ class _PrescriptionPageState extends State<PrescriptionPage> {
                 ),
               ),
               const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  if (selectedDrug.isNotEmpty &&
-                      dosageController.text.isNotEmpty) {
-                    addDrugContainer();
-                  }
-                },
-                child: Text('Ajouter un autre médicament'),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [Colors.white, Colors.grey[400]!],
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.5),
+                      spreadRadius: 1,
+                      blurRadius: 3,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: InkWell(
+                  onTap: () {
+                    if (selectedDrug.isNotEmpty &&
+                        dosageController.text.isNotEmpty) {
+                      addDrugContainer();
+                    }
+                  },
+                  child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.add_circle),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            'Ajouter un autre médicament',
+                          ),
+                        ],
+                      )),
+                ),
               ),
             ],
           ),
