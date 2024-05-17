@@ -1,6 +1,8 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:soigne_moi_mobile/api/services/api_service.dart';
 import 'package:soigne_moi_mobile/model/agenda.dart';
 import 'package:soigne_moi_mobile/model/doctor.dart';
@@ -24,6 +26,9 @@ class HomeController extends State<Home> {
 
   TextEditingController libelleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+
+  List<String> drugs = [];
+  String? selectedDrug;
 
   @override
   void initState() {
@@ -94,41 +99,72 @@ class HomeController extends State<Home> {
   }
 
   Future<void> submitMedicalReview() async {
-   try{
-     String libelle = libelleController.text;
-     String description = descriptionController.text;
-     final patientId = appointmentSelected?.patient.id;
+    try {
+      String libelle = libelleController.text;
+      String description = descriptionController.text;
+      final patientId = appointmentSelected?.patient.id;
 
-     final review = ReviewModel(
-         title: libelle,
-         description: description,
-         patientId: patientId.toString());
+      final review = ReviewModel(
+          title: libelle,
+          description: description,
+          patientId: patientId.toString());
 
-     await Api().createMedicalReview(review);
+      await Api().createMedicalReview(review);
 
-     showDialog(
-       context: context,
-       builder: (BuildContext context) {
-         return AlertDialog(
-           title: Text('Avis envoyé'),
-           content: Text('Votre avis médical a été envoyé avec succès.'),
-           actions: [
-             TextButton(
-               onPressed: () {
-                 Navigator.pop(context);
-               },
-               child: Text('OK'),
-             ),
-           ],
-         );
-       },
-     );
-   }catch (e){
-     showErrorDialog(e.toString(), context);
-   }
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Avis envoyé'),
+            content: Text('Votre avis médical a été envoyé avec succès.'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    } catch (e) {
+      showErrorDialog(e.toString(), context);
+    }
 
     libelleController.clear();
     descriptionController.clear();
+  }
+
+  Future<void> fetchDrugs() async {
+    try {
+      final dio = Dio();
+      final response = await dio.get(
+        'https://api.fda.gov/drug/label.json?count=openfda.brand_name.exact',
+      );
+
+      if (response.statusCode == 200) {
+        final decodedData = response.data;
+
+        // Vérifiez si la clé "results" existe dans les données décodées
+        if (decodedData.containsKey('results')) {
+          // Extraire la liste de médicaments de la clé "results"
+          final drugsList = (decodedData['results'] as List)
+              .map((item) => item['term'].toString())
+              .toList();
+
+          setState(() {
+            drugs = drugsList;
+          });
+        } else {
+          throw Exception('No data found');
+        }
+      } else {
+        throw Exception('Failed to load drugs');
+      }
+    } catch (e) {
+      print('Error fetching drugs: $e');
+    }
   }
 
   @override
