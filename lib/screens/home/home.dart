@@ -1,11 +1,10 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:soigne_moi_mobile/api/services/api_service.dart';
 import 'package:soigne_moi_mobile/model/agenda.dart';
 import 'package:soigne_moi_mobile/model/doctor.dart';
+import 'package:soigne_moi_mobile/model/prescription.dart';
 import 'package:soigne_moi_mobile/model/review.dart';
 import 'package:soigne_moi_mobile/screens/home/home_page.dart';
 import 'package:soigne_moi_mobile/widgets/error_dialog.dart';
@@ -29,6 +28,8 @@ class HomeController extends State<Home> {
 
   List<String> drugs = [];
   String? selectedDrug;
+
+  List<Drug> prescribedDrugs = [];
 
   @override
   void initState() {
@@ -163,8 +164,30 @@ class HomeController extends State<Home> {
         throw Exception('Failed to load drugs');
       }
     } catch (e) {
-      print('Error fetching drugs: $e');
+      if (kDebugMode) {
+        print('Error fetching drugs: $e');
+      }
     }
+  }
+
+  void addDrug(Drug drug) {
+    setState(() {
+      prescribedDrugs.add(drug);
+    });
+  }
+
+  void removeDrug(Drug drug) {
+    setState(() {
+      prescribedDrugs.remove(drug);
+    });
+  }
+
+  void createPrescription() {
+    // Logic for creating prescriptions with drugs
+    if (kDebugMode) {
+      print('Prescription créée avec ${prescribedDrugs.length} médicaments');
+    }
+    // Action to create
   }
 
   @override
