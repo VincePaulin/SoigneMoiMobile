@@ -36,9 +36,14 @@ class Api {
 
       return data;
     } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionError) {
+        throw 'Erreur de réseau';
+      }
       final errorMessage =
           e.response?.data['error'] ?? e.response?.data['message'];
       throw errorMessage;
+    } catch (e) {
+      throw 'Erreur de réseau';
     }
   }
 
@@ -67,9 +72,14 @@ class Api {
         throw messageError;
       }
     } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionError) {
+        throw 'Erreur de réseau';
+      }
       final messageError =
-          e.response?.data['message'] ?? "Une erreur s'est produit";
+          e.response?.data['message'] ?? "Une erreur s'est produite";
       throw messageError;
+    } catch (e) {
+      throw 'Erreur de réseau';
     }
   }
 
@@ -98,9 +108,14 @@ class Api {
         throw Exception(messageError);
       }
     } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionError) {
+        throw 'Erreur de réseau';
+      }
       final messageError =
           e.response?.data['message'] ?? "Une erreur s'est produite";
       throw messageError;
+    } catch (e) {
+      throw 'Erreur de réseau';
     }
   }
 
@@ -119,9 +134,14 @@ class Api {
 
       return data;
     } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionError) {
+        throw 'Erreur de réseau';
+      }
       final errorMessage =
           e.response?.data['error'] ?? e.response?.data['message'];
       throw errorMessage;
+    } catch (e) {
+      throw 'Erreur de réseau';
     }
   }
 
@@ -149,9 +169,14 @@ class Api {
         throw 'Erreur lors de la mise à jour de la date de fin';
       }
     } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionError) {
+        throw 'Erreur de réseau';
+      }
       final errorMessage =
           e.response?.data['message'] ?? "Une erreur s'est produite";
       throw errorMessage;
+    } catch (e) {
+      throw 'Erreur de réseau';
     }
   }
 }
