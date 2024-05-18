@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:soigne_moi_mobile/api/services/api_service.dart';
 import 'package:soigne_moi_mobile/model/prescription.dart';
+import 'package:soigne_moi_mobile/screens/home/home.dart';
 
 class PrescriptionDetailsPage extends StatefulWidget {
   final Prescription prescription;
+  final HomeController controller;
 
-  const PrescriptionDetailsPage({super.key, required this.prescription});
+  const PrescriptionDetailsPage({
+    super.key,
+    required this.prescription,
+    required this.controller,
+  });
 
   @override
   State<PrescriptionDetailsPage> createState() =>
@@ -69,11 +76,10 @@ class _PrescriptionDetailsPageState extends State<PrescriptionDetailsPage> {
                 .map((drug) => Text('${drug.name} - ${drug.dosage}')),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  widget.prescription.updateEndDate(_selectedEndDate);
-                });
-                // Call API to update the prescription here
+              onPressed: () async {
+                widget.controller
+                    .modifyEndDate(widget.prescription.id!, _selectedEndDate);
+
                 Navigator.pop(context, widget.prescription);
               },
               child: Text('Enregistrer les modifications'),

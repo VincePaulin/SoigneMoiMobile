@@ -117,12 +117,40 @@ class Api {
 
       final data = response.data;
 
-      print(data);
-
       return data;
     } on DioException catch (e) {
       final errorMessage =
           e.response?.data['error'] ?? e.response?.data['message'];
+      throw errorMessage;
+    }
+  }
+
+  Future<void> updatePrescriptionEndDate(
+      int prescriptionId, DateTime endDate) async {
+    dio.options.baseUrl = Endpoints.baseUrl;
+
+    final data = {
+      'prescription_id': prescriptionId,
+      'end_date': endDate.toIso8601String(),
+    };
+
+    try {
+      final response = await dio.post(
+        '/doctor/update-prescription-end-date',
+        data: data,
+        options: await _generateOptions(),
+      );
+
+      if (response.statusCode == 200) {
+        if (kDebugMode) {
+          print('Date de fin mise à jour avec succès');
+        }
+      } else {
+        throw 'Erreur lors de la mise à jour de la date de fin';
+      }
+    } on DioException catch (e) {
+      final errorMessage =
+          e.response?.data['message'] ?? "Une erreur s'est produite";
       throw errorMessage;
     }
   }

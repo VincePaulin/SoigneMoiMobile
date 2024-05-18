@@ -121,10 +121,16 @@ class _PatientMedicalFolderState extends State<PatientMedicalFolder> {
               final updatedPrescription = await Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      PrescriptionDetailsPage(prescription: prescription),
+                  builder: (context) => PrescriptionDetailsPage(
+                    prescription: prescription,
+                    controller: widget.controller,
+                  ),
                 ),
-              );
+              ).then((_) {
+                widget.controller.fetchPatientRecords(widget
+                    .controller.appointmentSelected!.patient.id
+                    .toString());
+              });
             },
             child: Container(
               decoration: BoxDecoration(

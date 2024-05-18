@@ -1,11 +1,13 @@
 // Prescription model
 class Prescription {
+  final int? id;
   final int? patientId;
   final List<Drug> drugs;
   final DateTime startDate;
   DateTime endDate;
 
   Prescription({
+    this.id,
     this.patientId,
     required this.drugs,
     required this.startDate,
@@ -15,6 +17,7 @@ class Prescription {
   // Copy constructor
   Prescription.copy(Prescription prescription)
       : patientId = prescription.patientId,
+        id = prescription.id,
         drugs = List<Drug>.from(prescription.drugs),
         startDate = prescription.startDate,
         endDate = prescription.endDate;
@@ -27,6 +30,7 @@ class Prescription {
   // Method to convert Prescription from JSON
   factory Prescription.fromJson(Map<String, dynamic> json) {
     return Prescription(
+      id: json['id'],
       drugs: (json['drugs'] as List<dynamic>)
           .map((drugJson) => Drug.fromJson(drugJson))
           .toList(),
