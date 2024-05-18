@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:soigne_moi_mobile/api/services/endpoints.dart';
+import 'package:soigne_moi_mobile/model/prescription.dart';
 import 'package:soigne_moi_mobile/model/review.dart';
 
 class Api {
@@ -68,6 +69,37 @@ class Api {
     } on DioException catch (e) {
       final messageError =
           e.response?.data['message'] ?? "Une erreur s'est produit";
+      throw messageError;
+    }
+  }
+
+  // Function to create a prescription
+  Future<void> createPrescription(Prescription prescription) async {
+    dio.options.baseUrl = Endpoints.baseUrl;
+
+    final Map<String, dynamic> prescriptionJson = prescription.toJson();
+
+    try {
+      final response = await dio.post(
+        '/doctors/prescription',
+        data: prescriptionJson,
+        options: await _generateOptions(),
+      );
+
+      // Check if the response status code is OK (201)
+      if (response.statusCode == 201) {
+        // Prescription créée avec succès
+        if (kDebugMode) {
+          print('Prescription créée avec succès');
+        }
+      } else {
+        // Error when creating prescription
+        final messageError = response.data['message'];
+        throw Exception(messageError);
+      }
+    } on DioException catch (e) {
+      final messageError =
+          e.response?.data['message'] ?? "Une erreur s'est produite";
       throw messageError;
     }
   }

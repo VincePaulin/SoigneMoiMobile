@@ -181,12 +181,32 @@ class HomeController extends State<Home> {
     });
   }
 
-  void createPrescription() {
-    // Logic for creating prescriptions with drugs
-    if (kDebugMode) {
-      print('Prescription créée avec ${prescribedDrugs.length} médicaments');
+  void createPrescription(
+      DateTime startDate, DateTime endDate, int patientId) async {
+    final prescription = Prescription(
+      patientId: patientId,
+      drugs: prescribedDrugs,
+      startDate: startDate,
+      endDate: endDate,
+    );
+
+    try {
+      if (kDebugMode) {
+        print('Prescription à envoyer : ${prescription.toJson()}');
+      }
+      await Api().createPrescription(prescription);
+      if (kDebugMode) {
+        print(
+            'Prescription créée avec ${prescription.drugs.length} médicaments');
+        print('Date de début : ${prescription.startDate}');
+        print('Date de fin : ${prescription.endDate}');
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('Erreur lors de la création de la prescription: $e');
+      }
+      showErrorDialog(e.toString(), context);
     }
-    // Action to create
   }
 
   Future<void> showConfirmationDialog() async {
@@ -260,7 +280,10 @@ class HomeController extends State<Home> {
                 TextButton(
                   child: Text('Confirmer'),
                   onPressed: () {
-                    createPrescription();
+                    if (appointmentSelected != null) {
+                      createPrescription(
+                          startDate, endDate, appointmentSelected!.patient.id);
+                    }
                     Navigator.of(context).pop();
                   },
                 ),

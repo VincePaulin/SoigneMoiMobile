@@ -16,7 +16,7 @@ class _PrescriptionPageState extends State<PrescriptionPage> {
 
   void addDrugContainer() {
     widget.controller
-        .addDrug(Drug(drug: selectedDrug, dosage: dosageController.text));
+        .addDrug(Drug(name: selectedDrug, dosage: dosageController.text));
     setState(() {
       selectedDrug = '';
       dosageController.clear(); // Reset dosage field
@@ -66,7 +66,7 @@ class _PrescriptionPageState extends State<PrescriptionPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            Text('Médicament : ${drug.drug}'),
+                            Text('Médicament : ${drug.name}'),
                             Text('Posologie : ${drug.dosage}'),
                           ],
                         ),
@@ -225,7 +225,7 @@ class _PrescriptionPageState extends State<PrescriptionPage> {
                             width: 5,
                           ),
                           Text(
-                            'Ajouter un autre médicament',
+                            'Valider ce médicament',
                           ),
                         ],
                       )),
