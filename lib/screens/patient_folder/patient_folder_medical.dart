@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:soigne_moi_mobile/model/medical_folder.dart';
+import 'package:intl/intl.dart';
 import 'package:soigne_moi_mobile/screens/home/home.dart';
+import 'package:soigne_moi_mobile/screens/review/review_details_page.dart';
+import 'package:soigne_moi_mobile/screens/prescription/prescription_details_page.dart';
 
 class PatientMedicalFolder extends StatefulWidget {
   final HomeController controller;
 
-  const PatientMedicalFolder({Key? key, required this.controller})
-      : super(key: key);
+  const PatientMedicalFolder({super.key, required this.controller});
 
   @override
   State<PatientMedicalFolder> createState() => _PatientMedicalFolderState();
@@ -63,28 +64,39 @@ class _PatientMedicalFolderState extends State<PatientMedicalFolder> {
         final review = avis[index];
         return Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(15),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: Offset(0, 3),
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ReviewDetailsPage(review: review),
                 ),
-              ],
-            ),
-            child: ListTile(
-              title: Text(review.title),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Description: ${review.description}'),
-                  Text('Docteur: ${review.doctorName ?? 'N/A'}'),
-                  Text('Date: ${review.date?.toIso8601String()}'),
+              );
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: const Offset(0, 3),
+                  ),
                 ],
+              ),
+              child: ListTile(
+                title: Text(review.title),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Description: ${review.description}'),
+                    Text('Docteur: ${review.doctorName ?? 'N/A'}'),
+                    Text(
+                        'Date: ${DateFormat('dd/MM/yyyy').format(review.date!)}'),
+                  ],
+                ),
               ),
             ),
           ),
@@ -104,28 +116,39 @@ class _PatientMedicalFolderState extends State<PatientMedicalFolder> {
         final prescription = prescriptions[index];
         return Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(15),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: Offset(0, 3),
+          child: GestureDetector(
+            onTap: () async {
+              final updatedPrescription = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      PrescriptionDetailsPage(prescription: prescription),
                 ),
-              ],
-            ),
-            child: ListTile(
-              title: Text(
-                  'Prescription du ${prescription.startDate.toIso8601String()} au ${prescription.endDate.toIso8601String()}'),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ...prescription.drugs
-                      .map((drug) => Text('${drug.name} - ${drug.dosage}')),
+              );
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 3),
+                  ),
                 ],
+              ),
+              child: ListTile(
+                title: Text(
+                    'Prescription du ${DateFormat('dd/MM/yyyy').format(prescription.startDate)} au ${DateFormat('dd/MM/yyyy').format(prescription.endDate)}'),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ...prescription.drugs
+                        .map((drug) => Text('${drug.name} - ${drug.dosage}')),
+                  ],
+                ),
               ),
             ),
           ),

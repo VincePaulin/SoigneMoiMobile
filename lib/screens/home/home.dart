@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:soigne_moi_mobile/api/services/api_service.dart';
 import 'package:soigne_moi_mobile/model/agenda.dart';
@@ -61,6 +63,10 @@ class HomeController extends State<Home> {
       if (kDebugMode) {
         print('Failed to fetch doctor agenda: $e');
       }
+      final FlutterSecureStorage secureStorage = FlutterSecureStorage();
+      await secureStorage.delete(key: 'access_token');
+      // Navigate to the login page
+      if (context.mounted) context.go('/');
     }
   }
 

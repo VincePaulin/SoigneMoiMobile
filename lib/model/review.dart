@@ -17,7 +17,7 @@ class ReviewModel {
     return ReviewModel(
       title: json['libelle'] ?? '',
       description: json['description'] ?? '',
-      doctorName: json['doctorName'] ?? '',
+      doctorName: json['doctor'] ?? '',
       date: DateTime.parse(json['date'] ?? ''),
       patientId: json['patient_id'] ?? '',
     );

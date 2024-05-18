@@ -117,6 +117,8 @@ class Api {
 
       final data = response.data;
 
+      print(data);
+
       return data;
     } on DioException catch (e) {
       final errorMessage =
