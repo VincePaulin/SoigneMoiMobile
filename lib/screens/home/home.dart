@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:soigne_moi_mobile/api/services/api_service.dart';
 import 'package:soigne_moi_mobile/model/agenda.dart';
 import 'package:soigne_moi_mobile/model/doctor.dart';
+import 'package:soigne_moi_mobile/model/medical_folder.dart';
 import 'package:soigne_moi_mobile/model/prescription.dart';
 import 'package:soigne_moi_mobile/model/review.dart';
 import 'package:soigne_moi_mobile/screens/home/home_page.dart';
@@ -311,6 +312,19 @@ class HomeController extends State<Home> {
         );
       },
     );
+  }
+
+  MedicalFolder? folder;
+
+  Future<void> fetchPatientRecords(String patientId) async {
+    try {
+      final data = await Api().getPatientRecords(patientId);
+      final medicalFolder = MedicalFolder.fromJson(data);
+
+      setState(() => folder = medicalFolder);
+    } catch (e) {
+      showErrorDialog(e.toString(), context);
+    }
   }
 
   @override

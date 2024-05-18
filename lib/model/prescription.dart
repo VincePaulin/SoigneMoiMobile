@@ -1,12 +1,12 @@
 // Prescription model
 class Prescription {
-  final int patientId;
+  final int? patientId;
   final List<Drug> drugs;
   final DateTime startDate;
   DateTime endDate;
 
   Prescription({
-    required this.patientId,
+    this.patientId,
     required this.drugs,
     required this.startDate,
     required this.endDate,
@@ -27,12 +27,11 @@ class Prescription {
   // Method to convert Prescription from JSON
   factory Prescription.fromJson(Map<String, dynamic> json) {
     return Prescription(
-      patientId: json['patientId'],
       drugs: (json['drugs'] as List<dynamic>)
           .map((drugJson) => Drug.fromJson(drugJson))
           .toList(),
-      startDate: DateTime.parse(json['startDate']),
-      endDate: DateTime.parse(json['endDate']),
+      startDate: DateTime.parse(json['start_date']),
+      endDate: DateTime.parse(json['end_date']),
     );
   }
 
@@ -60,7 +59,7 @@ class Drug {
   // Method to convert Drug from JSON
   factory Drug.fromJson(Map<String, dynamic> json) {
     return Drug(
-      name: json['name'] as String,
+      name: json['drug'] as String,
       dosage: json['dosage'] as String,
     );
   }

@@ -103,4 +103,25 @@ class Api {
       throw messageError;
     }
   }
+
+  // Function to get patient records
+  Future<Map<String, dynamic>> getPatientRecords(String patientId) async {
+    dio.options.baseUrl = Endpoints.baseUrl;
+
+    try {
+      final response = await dio.get(
+        '/doctors/patient-records',
+        data: {'patient_id': patientId},
+        options: await _generateOptions(),
+      );
+
+      final data = response.data;
+
+      return data;
+    } on DioException catch (e) {
+      final errorMessage =
+          e.response?.data['error'] ?? e.response?.data['message'];
+      throw errorMessage;
+    }
+  }
 }

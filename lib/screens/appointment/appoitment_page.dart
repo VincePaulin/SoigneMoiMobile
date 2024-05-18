@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:soigne_moi_mobile/screens/home/home.dart';
+import 'package:soigne_moi_mobile/screens/patient_folder/patient_folder_medical.dart';
 import 'package:soigne_moi_mobile/screens/prescription/prescription_page.dart';
 import 'package:soigne_moi_mobile/screens/review/review_view.dart';
 import 'package:soigne_moi_mobile/widgets/appointment_icon_button.dart';
@@ -60,7 +61,13 @@ class AppointmentPage extends StatelessWidget {
                 AppointmentIconButton(
                   icon: MdiIcons.folderSearch,
                   onTap: () {
-                    // Action
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PatientMedicalFolder(
+                                controller: controller,
+                              )),
+                    );
                   },
                 ),
               ],
