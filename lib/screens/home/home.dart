@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // Importer intl pour formater les dates
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
 import 'package:soigne_moi_mobile/api/services/api_service.dart';
 import 'package:soigne_moi_mobile/model/agenda.dart';
 import 'package:soigne_moi_mobile/model/doctor.dart';
@@ -201,6 +202,24 @@ class HomeController extends State<Home> {
         print('Date de début : ${prescription.startDate}');
         print('Date de fin : ${prescription.endDate}');
       }
+      Fluttertoast.showToast(
+          msg: "Prescription ajoutée au dossier du patient",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.green,
+          textColor: Colors.white,
+          fontSize: 16.0);
+      setState(() {
+        drugs = [];
+        selectedDrug = null;
+        prescribedDrugs = [];
+      });
+
+      // Close the confirmation dialog and navigate back
+      Navigator.of(context).pop(); // Close the dialog
+      await Future.delayed(
+          const Duration(milliseconds: 200)); // Ensure pop is processed
     } catch (e) {
       if (kDebugMode) {
         print('Erreur lors de la création de la prescription: $e');
@@ -284,7 +303,6 @@ class HomeController extends State<Home> {
                       createPrescription(
                           startDate, endDate, appointmentSelected!.patient.id);
                     }
-                    Navigator.of(context).pop();
                   },
                 ),
               ],
