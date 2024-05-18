@@ -326,15 +326,6 @@ class HomeController extends State<Home> {
     try {
       final data = await Api().getPatientRecords(patientId);
       final medicalFolder = MedicalFolder.fromJson(data);
-      Fluttertoast.showToast(
-          msg: "Date de fin modfifée.",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.green,
-          textColor: Colors.white,
-          fontSize: 16.0);
-
       setState(() => folder = medicalFolder);
     } catch (e) {
       showErrorDialog(e.toString(), context);
@@ -344,6 +335,14 @@ class HomeController extends State<Home> {
   Future<void> modifyEndDate(int id, DateTime selectedEndDate) async {
     try {
       await Api().updatePrescriptionEndDate(id, selectedEndDate);
+      Fluttertoast.showToast(
+          msg: "Date de fin modfifée.",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.green,
+          textColor: Colors.white,
+          fontSize: 16.0);
     } catch (e) {
       showErrorDialog(e.toString(), context);
     }

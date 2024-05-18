@@ -88,18 +88,21 @@ class HomePage extends StatelessWidget {
                     : _buildAppointmentPageRoute(context, controller),
               ),
             ),
-            Positioned(
-                bottom: 0,
-                right: 0,
-                left: 0,
-                child: CustomBottomNavigationBar(
-                  onHomePressed: () {
-                    // Action when home button is pressed
-                  },
-                  onSettingsPressed: () {
-                    // Action when the settings button is pressed
-                  },
-                ))
+
+            // An unfinished navigator bar
+
+            // Positioned(
+            //     bottom: 0,
+            //     right: 0,
+            //     left: 0,
+            //     child: CustomBottomNavigationBar(
+            //       onHomePressed: () {
+            //         // Action when home button is pressed
+            //       },
+            //       onSettingsPressed: () {
+            //         // Action when the settings button is pressed
+            //       },
+            //     ))
           ],
         ),
       ),
