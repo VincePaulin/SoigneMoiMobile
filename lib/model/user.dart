@@ -25,7 +25,7 @@ class User {
     return User(
       id: json['id'],
       name: json['name'],
-      firstName: json['first_name'],
+      firstName: json['first_name'] ?? "",
       email: json['email'],
       role: json['role'] ?? "user",
       emailVerifiedAt: json['email_verified_at'] != null
