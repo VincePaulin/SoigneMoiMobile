@@ -15,6 +15,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool itemSelected = controller.appointmentSelected != null;
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: CustomAppBar(
           doctor: controller.doctor!,

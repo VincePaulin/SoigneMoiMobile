@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -23,11 +24,9 @@ class MyApp extends StatelessWidget {
     ]);
     return MaterialApp.router(
       title: 'Soigne Moi',
+      debugShowCheckedModeBanner: kDebugMode ?true :false,
       routerConfig: router,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.accentColor),
-        useMaterial3: true,
-      ),
+      theme: buildAppTheme(),
     );
   }
 }
