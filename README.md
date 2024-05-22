@@ -32,7 +32,7 @@ Vous devez aussi avoir installé Flutter.
 
     ```bash
     git clone https://github.com/VincePaulin/SoigneMoiMobile.git
-    cd SoigneMoiWeb
+    cd SoigneMoiMobile
     ```
 
 2. Lancer l'application en mode debug
